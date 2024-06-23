@@ -1,4 +1,4 @@
-package com.example.interview;
+package com.sherpa.interview;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
