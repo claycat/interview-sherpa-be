@@ -9,14 +9,25 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.sherpa.interview.domain.websocket.WebSocketCommand;
+import com.sherpa.interview.domain.websocket.command.CommandEnum;
+import com.sherpa.interview.domain.websocket.command.WebSocketCommandFactory;
+
 @Component
 public class NodeWebSocketHandler extends TextWebSocketHandler {
+
 	private final CopyOnWriteArrayList<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+	private final WebSocketCommandFactory commandFactory;
+
+	public NodeWebSocketHandler(WebSocketCommandFactory commandFactory) {
+		this.commandFactory = commandFactory;
+	}
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
-		sendWelcomeMessage(session);
+		WebSocketCommand sendMindmapCommand = commandFactory.getCommand(CommandEnum.SENDMINDMAP);
+		sendMindmapCommand.execute(session);
 	}
 
 	@Override

@@ -1,23 +1,21 @@
 package com.sherpa.interview.domain.node.nodedata;
 
-import lombok.AccessLevel;
-import lombok.Builder;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class NodeData {
 	private String label;
 	private String question;
-	private String answer;
+	private List<String> answers;
 
-	@Builder
-	public NodeData(String label, String question, String answer) {
-		this.label = label;
-		this.question = question;
-		this.answer = answer;
-	}
 }
