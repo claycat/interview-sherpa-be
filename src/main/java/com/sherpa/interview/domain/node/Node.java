@@ -1,30 +1,26 @@
 package com.sherpa.interview.domain.node;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.sherpa.interview.domain.node.nodedata.NodeData;
 
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
-@Document(collection = "nodes")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Node {
-	@Id
 	private String id;
 	private String type;
 	private NodeData data;
 	private Position position;
-
-	@Builder
-	public Node(String id, String type, NodeData data, Position position) {
-		this.id = id;
-		this.type = type;
-		this.data = data;
-		this.position = position;
-	}
+	private int width;
+	private int height;
+	private boolean selected;
+	private boolean dragging;
+	private PositionAbsolute positionAbsolute;
 }
