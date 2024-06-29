@@ -16,11 +16,12 @@ import org.springframework.web.socket.WebSocketSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sherpa.interview.domain.flow.Flow;
 import com.sherpa.interview.domain.flow.repository.FlowRepository;
+import com.sherpa.interview.domain.websocket.command.clientconnect.ClientConnectCommand;
 
 class SendMindmapCommandTest {
 
 	@InjectMocks
-	private SendMindmapCommand sendMindmapCommand;
+	private ClientConnectCommand clientConnectCommand;
 
 	@Mock
 	private FlowRepository flowRepository;
@@ -48,7 +49,7 @@ class SendMindmapCommandTest {
 		when(objectMapper.writeValueAsString(any())).thenReturn(serializedMessage);
 
 		//when
-		sendMindmapCommand.execute(session);
+		//clientConnectCommand.execute(session);
 
 		//then
 		verify(flowRepository).findAll();

@@ -26,7 +26,7 @@ import lombok.ToString;
 @Builder
 public class Flow {
 	@Id
-	@Field("id")
+	@Field("_id")
 	private String documentId;
 	private List<Node> nodes;
 	private List<Edge> edges;

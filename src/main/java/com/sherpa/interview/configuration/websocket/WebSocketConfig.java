@@ -6,22 +6,22 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.sherpa.interview.configuration.websocket.handler.NodeWebSocketHandler;
+import com.sherpa.interview.configuration.websocket.handler.WebSocketHandler;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-	private final NodeWebSocketHandler nodeWebSocketHandler;
+	private final WebSocketHandler webSocketHandler;
 
 	@Autowired
-	public WebSocketConfig(NodeWebSocketHandler nodeWebSocketHandler) {
-		this.nodeWebSocketHandler = nodeWebSocketHandler;
+	public WebSocketConfig(WebSocketHandler webSocketHandler) {
+		this.webSocketHandler = webSocketHandler;
 	}
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(nodeWebSocketHandler, "/ws/nodes")
+		registry.addHandler(webSocketHandler, "/ws/nodes")
 			.setAllowedOrigins("*");
 	}
 
