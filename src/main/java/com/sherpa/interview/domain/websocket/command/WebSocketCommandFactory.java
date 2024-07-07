@@ -1,51 +1,30 @@
 package com.sherpa.interview.domain.websocket.command;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sherpa.interview.domain.flow.repository.FlowRepository;
 import com.sherpa.interview.domain.websocket.WebSocketCommand;
-import com.sherpa.interview.domain.websocket.command.clientconnect.ClientConnectCommand;
-import com.sherpa.interview.domain.websocket.command.clientconnect.ClientConnectContext;
-import com.sherpa.interview.domain.websocket.command.enums.ClientCommandEnum;
-import com.sherpa.interview.domain.websocket.command.receive.ClientUpdateCommandContext;
-import com.sherpa.interview.domain.websocket.command.receive.ClientUpdateMindmapCommand;
+import com.sherpa.interview.domain.websocket.command.enums.CommandEnum;
 
 @Component
 public class WebSocketCommandFactory {
 
-	private final ObjectMapper objectMapper;
-	private final FlowRepository flowRepository;
+	private final Map<CommandEnum, WebSocketCommand> commandMap = new HashMap<>();
 
 	@Autowired
-	public WebSocketCommandFactory(ObjectMapper objectMapper, FlowRepository flowRepository) {
-		this.objectMapper = objectMapper;
-		this.flowRepository = flowRepository;
+	public WebSocketCommandFactory(List<WebSocketCommand> commands) {
+		for (WebSocketCommand command : commands) {
+			commandMap.put(command.getCommandType(), command);
+		}
 	}
 
-	public WebSocketCommand getCommand(CommandKey commandKey) {
+	public WebSocketCommand getCommand(CommandEnum commandEnum) {
 
-		switch (commandKey.commandType()) {
-			case ClientCommandEnum.CLIENT_CONNECT_REQUEST -> {
-				return new ClientConnectCommand(ClientConnectContext.builder()
-					.session(commandKey.sourceSession())
-					.flowRepository(flowRepository)
-					.objectMapper(objectMapper)
-					.build());
-			}
-			case ClientCommandEnum.CLIENT_UPDATE_FLOW_REQUEST -> {
-				return new ClientUpdateMindmapCommand(ClientUpdateCommandContext.builder()
-					.sessions(commandKey.sessions())
-					.sourceSession(commandKey.sourceSession())
-					.flowRepository(flowRepository)
-					.objectMapper(objectMapper)
-					.build());
-			}
-			default -> {
-				throw new IllegalArgumentException("Unknown Command Type");
-			}
-		}
+		return commandMap.get(commandEnum);
 	}
 
 }

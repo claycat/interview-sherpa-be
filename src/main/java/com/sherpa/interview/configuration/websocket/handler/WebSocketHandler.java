@@ -8,20 +8,23 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.sherpa.interview.domain.websocket.WebSocketMessageService;
+import com.sherpa.interview.domain.websocket.WebSocketSessionManager;
 
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 
+	private final WebSocketSessionManager webSocketSessionManager;
 	private final WebSocketMessageService messageService;
 
 	@Autowired
-	public WebSocketHandler(WebSocketMessageService messageService) {
+	public WebSocketHandler(WebSocketSessionManager webSocketSessionManager, WebSocketMessageService messageService) {
+		this.webSocketSessionManager = webSocketSessionManager;
 		this.messageService = messageService;
 	}
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		messageService.addSession(session);
+		webSocketSessionManager.addSession(session);
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-		messageService.removeSession(session);
+		webSocketSessionManager.removeSession(session);
 	}
 
 }
