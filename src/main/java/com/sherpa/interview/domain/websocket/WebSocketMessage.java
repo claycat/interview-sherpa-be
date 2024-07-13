@@ -1,6 +1,6 @@
 package com.sherpa.interview.domain.websocket;
 
-import com.sherpa.interview.domain.websocket.command.CommandEnum;
+import com.sherpa.interview.domain.websocket.command.enums.CommandEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

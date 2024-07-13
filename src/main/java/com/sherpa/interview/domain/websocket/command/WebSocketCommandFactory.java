@@ -1,34 +1,30 @@
 package com.sherpa.interview.domain.websocket.command;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sherpa.interview.domain.websocket.SendMindmapCommand;
 import com.sherpa.interview.domain.websocket.WebSocketCommand;
-
-import jakarta.annotation.PostConstruct;
+import com.sherpa.interview.domain.websocket.command.enums.CommandEnum;
 
 @Component
 public class WebSocketCommandFactory {
 
-	private final SendMindmapCommand sendMindmapCommand;
-
-	private final HashMap<CommandEnum, WebSocketCommand> commandHashMap = new HashMap<>();
+	private final Map<CommandEnum, WebSocketCommand> commandMap = new HashMap<>();
 
 	@Autowired
-	public WebSocketCommandFactory(SendMindmapCommand sendMindmapCommand) {
-		this.sendMindmapCommand = sendMindmapCommand;
+	public WebSocketCommandFactory(List<WebSocketCommand> commands) {
+		for (WebSocketCommand command : commands) {
+			commandMap.put(command.getCommandType(), command);
+		}
 	}
 
-	@PostConstruct
-	public void init() {
-		commandHashMap.put(CommandEnum.SENDMINDMAP, sendMindmapCommand);
-	}
+	public WebSocketCommand getCommand(CommandEnum commandEnum) {
 
-	public WebSocketCommand getCommand(CommandEnum command) {
-		return commandHashMap.get(command);
+		return commandMap.get(commandEnum);
 	}
 
 }

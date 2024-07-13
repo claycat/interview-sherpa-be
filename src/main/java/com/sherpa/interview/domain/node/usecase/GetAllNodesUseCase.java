@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sherpa.interview.configuration.websocket.handler.NodeWebSocketHandler;
+import com.sherpa.interview.configuration.websocket.handler.WebSocketHandler;
 import com.sherpa.interview.domain.node.repository.NodeRepository;
 import com.sherpa.interview.domain.node.usecase.dto.GetAllNodesResult;
 import com.sherpa.interview.domain.node.usecase.dto.UpdateNodeCommand;
@@ -17,12 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GetAllNodesUseCase {
 
-	private final NodeWebSocketHandler webSocketHandler;
+	private final WebSocketHandler webSocketHandler;
 	private final NodeRepository nodeRepository;
 	private final ObjectMapper objectMapper;
 
 	@Autowired
-	public GetAllNodesUseCase(final NodeWebSocketHandler webSocketHandler, NodeRepository nodeRepository,
+	public GetAllNodesUseCase(final WebSocketHandler webSocketHandler, NodeRepository nodeRepository,
 		ObjectMapper objectMapper) {
 		this.webSocketHandler = webSocketHandler;
 		this.nodeRepository = nodeRepository;
