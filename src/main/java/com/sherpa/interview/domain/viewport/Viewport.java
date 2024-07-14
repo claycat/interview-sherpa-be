@@ -1,4 +1,4 @@
-package com.sherpa.interview.domain.Viewport;
+package com.sherpa.interview.domain.viewport;
 
 import lombok.Builder;
 

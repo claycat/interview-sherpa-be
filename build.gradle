@@ -36,6 +36,10 @@ dependencies {
 	implementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '3.0.0'
 
 
+	//annotation
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+
 	//Protocol
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 

@@ -1,13 +1,7 @@
-package com.sherpa.interview.domain.flow;
-
-import java.util.List;
+package com.sherpa.interview.domain.user;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.sherpa.interview.domain.edge.Edge;
-import com.sherpa.interview.domain.node.Node;
-import com.sherpa.interview.domain.viewport.Viewport;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -17,19 +11,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Document("flows")
+@Document
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Builder
-public class Flow {
+public class User {
 	@Id
 	@Field("_id")
-	private String documentId;
-	private List<Node> nodes;
-	private List<Edge> edges;
-	private Viewport viewport;
-
+	private String id;
+	private String email;
+	private String name;
 }
