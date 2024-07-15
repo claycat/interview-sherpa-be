@@ -35,10 +35,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '3.0.0'
 
-
-	//annotation
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
+	//Security
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	//Protocol
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
