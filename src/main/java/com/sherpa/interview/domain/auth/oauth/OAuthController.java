@@ -1,5 +1,7 @@
 package com.sherpa.interview.domain.auth.oauth;
 
+import java.net.http.HttpResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sherpa.interview.domain.auth.oauth.constant.OAuthProviderEnum;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -25,10 +28,11 @@ public class OAuthController {
 	}
 
 	@GetMapping("/{oauthProvider}")
-	public void redirectToLogin(@PathVariable("oauthProvider") OAuthProviderEnum oAuthProviderEnum) {
+	public void redirectToLogin(@PathVariable("oauthProvider") OAuthProviderEnum oAuthProviderEnum, HttpServletResponse response) {
 		log.info(oAuthProviderEnum.toString());
 		System.out.println("oAuthProviderEnum = " + oAuthProviderEnum);
-		//return "redirect:/oauth2/authorization/" + oAuthProviderEnum.name();
+
+		//response.sendRedirect("http://localhost:8080/oauth/logn/");
 
 		return;
 	}

@@ -36,8 +36,14 @@ dependencies {
 	implementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '3.0.0'
 
 	//Security
-	implementation "org.springframework.boot:spring-boot-starter-security"
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation("org.springframework.boot:spring-boot-starter-security:3.1.0")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.1.0")
+	ext {
+		JJWT_VERSION = "0.12.5"
+	}
+	implementation "io.jsonwebtoken:jjwt-api:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-gson:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:${JJWT_VERSION}"
 
 	//Protocol
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'

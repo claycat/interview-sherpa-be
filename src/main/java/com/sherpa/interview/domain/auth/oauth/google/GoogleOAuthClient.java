@@ -51,6 +51,9 @@ public class GoogleOAuthClient {
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 		ResponseEntity<GoogleTokenResponse> response = restTemplate.postForEntity(tokenUri, request,
 			GoogleTokenResponse.class);
+
+		System.out.println("exchange: response.getBody() = " + response.getBody());
+
 		return response.getBody();
 	}
 
