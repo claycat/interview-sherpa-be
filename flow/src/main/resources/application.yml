@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: sherpa
+  profiles:
+    active: "dev"
+  config:
+    import: optional:file.env[.properties]
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:43306/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: ${MYSQL_ROOT_USERNAME}
+    password: ${MYSQL_ROOT_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: sherpa
+      password: 1q2w3e4r@@Q
+      database: sherpa
+      authentication-database: sherpa
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.SQL_SLOW: INFO
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.stat: TRACE
