@@ -15,7 +15,7 @@ spring:
       path: /h2-console
   data:
     mongodb:
-      uri: mongodb://localhost:27018/test
+      uri: mongodb://localhost:27019/test
 
   main:
     allow-bean-definition-overriding: true
