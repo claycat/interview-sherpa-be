@@ -1,6 +1,6 @@
-package com.sherpa.auth.controller;
+package com.sherpa.auth.security.oauth;
 
-
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sherpa.auth.constant.OAuthProviderEnum;
-import com.sherpa.auth.security.oauth.OAuthServiceResolver;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -28,21 +26,16 @@ public class OAuthController {
 		this.oAuthServiceResolver = oAuthServiceResolver;
 	}
 
-	@GetMapping("/{oauthProvider}")
-	public void redirectToLogin(@PathVariable("oauthProvider") OAuthProviderEnum oAuthProviderEnum, HttpServletResponse response) {
-		log.info(oAuthProviderEnum.toString());
-		System.out.println("oAuthProviderEnum = " + oAuthProviderEnum);
-
-		//response.sendRedirect("http://localhost:8080/oauth/logn/");
-
-		return;
-	}
-
 	@GetMapping("/login/{oauthProvider}")
 	public ResponseEntity<Void> login(@PathVariable("oauthProvider") OAuthProviderEnum oAuthProviderEnum,
 		@RequestParam("code") String code) {
 		var oAuthService = oAuthServiceResolver.resolve(oAuthProviderEnum);
-		oAuthService.login(code);
+
+		try {
+			oAuthService.login(code);
+		} catch (IOException e) {
+			//TODO should catch and return some bad status..
+		}
 
 		return ResponseEntity.ok().build();
 	}

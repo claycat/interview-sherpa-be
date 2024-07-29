@@ -1,9 +1,7 @@
 package com.sherpa.auth.security.oauth.google;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import com.sherpa.auth.constant.OAuthProviderEnum;
@@ -14,19 +12,12 @@ public class GoogleOAuthService implements OAuthService {
 
 	private final GoogleOAuthClient googleOAuthClient;
 
-
-	@Autowired
-	private OAuth2AuthorizedClientService auth2AuthorizedClientService;
-
-	@Autowired
-	private ClientRegistrationRepository clientRegistrationRepository;
-
 	public GoogleOAuthService(GoogleOAuthClient googleOAuthClient) {
 		this.googleOAuthClient = googleOAuthClient;
 	}
 
 	@Override
-	public void login(String code) {
+	public void login(String code) throws IOException {
 		var response = googleOAuthClient.exchangeCodeForToken(code);
 	}
 

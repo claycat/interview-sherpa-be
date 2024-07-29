@@ -1,15 +1,16 @@
 package com.sherpa.auth.security.oauth.google;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GoogleOAuthClient {
 
-	private final RestTemplate restTemplate;
+	private HttpTransport httpTransport = new NetHttpTransport();
+	private GsonFactory gsonFactory = GsonFactory.getDefaultInstance();
 
 	@Value("${spring.security.oauth2.client.provider.google.token-uri}")
 	private String tokenUri;
@@ -31,30 +33,30 @@ public class GoogleOAuthClient {
 	@Value("${spring.security.oauth2.client.registration.google.redirect-uri}")
 	private String redirectUri;
 
-	@Autowired
-	public GoogleOAuthClient(final RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
+	public GoogleTokenResponse exchangeCodeForToken(String code) throws IOException {
+
+		GoogleTokenResponse tokenResponse = new GoogleAuthorizationCodeTokenRequest(
+			httpTransport,
+			gsonFactory,
+			tokenUri,
+			clientId,
+			clientSecret,
+			code,
+			redirectUri
+		).execute();
+
+		return tokenResponse;
 	}
 
-	public GoogleTokenResponse exchangeCodeForToken(String code) {
-		log.debug("Exchanging code for token: {}", code);
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add("code", code);
-		params.add("client_id", clientId);
-		params.add("client_secret", clientSecret);
-		params.add("redirect_uri", redirectUri);
-		params.add("grant_type", "authorization_code");
+	public GoogleUserInfo extractGoogleUserInfo(GoogleTokenResponse tokenResponse) throws IOException {
+		GoogleIdToken googleIdToken = tokenResponse.parseIdToken();
+		GoogleIdToken.Payload payload = googleIdToken.getPayload();
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
-		ResponseEntity<GoogleTokenResponse> response = restTemplate.postForEntity(tokenUri, request,
-			GoogleTokenResponse.class);
-
-		System.out.println("exchange: response.getBody() = " + response.getBody());
-
-		return response.getBody();
+		return GoogleUserInfo.builder()
+			.email(payload.getEmail())
+			.pictureUrl((String)payload.get("picture"))
+			.name((String)payload.get("name"))
+			.build();
 	}
 
 }
