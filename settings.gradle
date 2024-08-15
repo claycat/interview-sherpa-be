@@ -2,3 +2,4 @@ rootProject.name = 'interview'
 
 include 'flow'
 include 'auth'
+include 'gateway'
