@@ -26,7 +26,7 @@ public class SecurityConfig {
 			.formLogin(AbstractHttpConfigurer::disable)
 			.httpBasic(AbstractHttpConfigurer::disable)
 			.authorizeRequests(authorizeRequests -> authorizeRequests
-				.requestMatchers("/login", "/error", "/webjars/**").permitAll()
+				.requestMatchers("/test", "/login", "/error", "/webjars/**").permitAll()
 				.anyRequest().authenticated())
 			.oauth2Login(oauth -> oauth
 				.defaultSuccessUrl("/signInSuccess", true)
