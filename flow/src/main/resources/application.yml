@@ -7,7 +7,7 @@ spring:
     import: optional:file.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:43306/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: ${MYSQL_ROOT_USERNAME}
     password: ${MYSQL_ROOT_PASSWORD}
   jpa:
@@ -22,12 +22,12 @@ spring:
 
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      username: sherpa
-      password: 1q2w3e4r@@Q
-      database: sherpa
-      authentication-database: sherpa
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      username: ${MONGO_INITDB_ROOT_USERNAME}
+      password: ${MONGO_INITDB_ROOT_PASSWORD}
+      database: ${MONGO_INITDB_DATABASE}
+      authentication-database: ${MONGO_AUTHENTICATION_DATABASE}
 
 
 logging:

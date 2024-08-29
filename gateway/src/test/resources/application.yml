@@ -1,13 +1,16 @@
 spring:
+  application:
+    name: gateway
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: client-id
-            client-secret: client-secret
+            client-id: id
+            client-secret: secret
             scope: openid, email, profile
             authorization-grant-type: authorization_code
+            redirect-uri: uri
 
         provider:
           google:
@@ -16,16 +19,11 @@ spring:
             user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
             user-name-attribute: sub
 
-jwt:
-  # for test
-  secret-key: 9af32131414e442c39395c4c2a14b95da45fa2eedd550413934e4f273b2dbc078894a238d025f09926393fc96d2d490f49e2ef4d5e9e13c9ed1f40ed957a0111
-  access-key-expiration-ms: 300000
-  access-key-expiration-s: 300
+service:
+  auth: http://localhost:8080
+  client: http://localhost:3000
 
-logging:
-  level:
-    org:
-      springframework:
-        web:
-          filter:
-            CommonsRequestLoggingFilter: DEBUG
+
+jwt:
+  secret-key: f6eaec3dcc252c2503a249100b0dbfb077d4f9ccf86f04c91b3a74447adfb0eeeec23de3c62733ef011ccd9add3ef407eb2bc146b3bdb98942caf18cf1f01cae
+  access-key-expiration-s: 60
