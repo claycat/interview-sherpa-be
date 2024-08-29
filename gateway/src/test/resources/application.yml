@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: gateway
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: id
+            client-secret: secret
+            scope: openid, email, profile
+            authorization-grant-type: authorization_code
+            redirect-uri: uri
+
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            user-name-attribute: sub
+
+service:
+  auth: http://localhost:8080
+  client: http://localhost:3000
+
+
+jwt:
+  secret-key: f6eaec3dcc252c2503a249100b0dbfb077d4f9ccf86f04c91b3a74447adfb0eeeec23de3c62733ef011ccd9add3ef407eb2bc146b3bdb98942caf18cf1f01cae
+  access-key-expiration-s: 60
