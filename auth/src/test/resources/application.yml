@@ -21,3 +21,11 @@ jwt:
   secret-key: 9af32131414e442c39395c4c2a14b95da45fa2eedd550413934e4f273b2dbc078894a238d025f09926393fc96d2d490f49e2ef4d5e9e13c9ed1f40ed957a0111
   access-key-expiration-ms: 300000
   access-key-expiration-s: 300
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
