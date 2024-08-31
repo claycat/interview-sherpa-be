@@ -3,8 +3,8 @@ plugins {
 }
 rootProject.name = 'interview'
 
-include 'flow'
-include 'auth'
+include 'flow-service'
 include 'gateway'
 include 'shared-lib'
+include 'member-service'
 
