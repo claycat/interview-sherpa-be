@@ -1,4 +1,6 @@
-package com.sherpa.member.user.dto;
+package com.sherpa.member.member.adapter.in;
+
+import com.sherpa.member.member.application.port.in.OAuthRegisterMemberCommand;
 
 import lombok.Builder;
 import lombok.Getter;

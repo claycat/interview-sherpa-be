@@ -1,4 +1,4 @@
-package com.sherpa.member.user;
+package com.sherpa.member.member.adapter.in;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sherpa.member.user.dto.OAuthRegisterMemberRequest;
-import com.sherpa.member.user.usecase.OAuthRegisterMemberUseCase;
+import com.sherpa.member.member.application.port.in.OAuthRegisterMemberUseCase;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +23,7 @@ public class OAuthMemberController {
 
 	@PostMapping
 	public ResponseEntity<?> register(final @RequestBody OAuthRegisterMemberRequest request) {
-		oAuthRegisterMemberUseCase.registerOAuthMember(request.toCommand());
+		oAuthRegisterMemberUseCase.registerMember(request.toCommand());
 
 		return ResponseEntity.ok().build();
 	}
