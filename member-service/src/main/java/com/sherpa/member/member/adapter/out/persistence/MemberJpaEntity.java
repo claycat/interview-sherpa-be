@@ -1,4 +1,4 @@
-package com.sherpa.member.user.entity;
+package com.sherpa.member.member.adapter.out.persistence;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "members")
-public class Member {
+public class MemberJpaEntity {
 	@Id
 	@UuidGenerator
 	@Column(name = "member_id", nullable = false, updatable = false)
@@ -49,7 +49,7 @@ public class Member {
 	private LocalDateTime createdAt;
 
 	@Builder
-	public Member(String email, String name, String profileURL) {
+	public MemberJpaEntity(String email, String name, String profileURL) {
 		this.email = email;
 		this.name = name;
 		this.profileURL = profileURL;
