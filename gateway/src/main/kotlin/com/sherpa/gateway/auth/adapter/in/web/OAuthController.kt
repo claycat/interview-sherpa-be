@@ -1,9 +1,9 @@
-package com.sherpa.gateway.domain.auth
+package com.sherpa.gateway.auth.adapter.`in`.web
 
-import com.sherpa.gateway.domain.auth.dto.OAuthSignInCommand
-import com.sherpa.gateway.domain.auth.oauthattributes.OAuthAttributes
-import com.sherpa.gateway.domain.auth.oauthattributes.OAuthProvider
-import com.sherpa.gateway.domain.auth.usecase.OAuthSignInUseCase
+import com.sherpa.gateway.auth.application.port.`in`.OAuthSignInUseCase
+import com.sherpa.gateway.auth.application.port.`in`.dto.OAuthSignInCommand
+import com.sherpa.gateway.auth.application.service.OAuthAttributes
+import com.sherpa.gateway.auth.application.service.OAuthProvider
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -14,7 +14,9 @@ import org.springframework.web.server.ServerWebExchange
 import java.net.URI
 
 @RestController
-class OAuthController(val oAuthSignInUseCase: OAuthSignInUseCase) {
+class OAuthController(
+    private val oAuthSignInUseCase: OAuthSignInUseCase
+) {
 
     @Value("\${service.client}")
     lateinit var clientURL: String

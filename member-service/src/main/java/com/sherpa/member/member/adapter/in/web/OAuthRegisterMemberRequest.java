@@ -1,4 +1,4 @@
-package com.sherpa.member.member.adapter.in;
+package com.sherpa.member.member.adapter.in.web;
 
 import com.sherpa.member.member.application.port.in.OAuthRegisterMemberCommand;
 

@@ -1,7 +1,7 @@
 package com.sherpa.httpclient
 
 class ApiException(
-    val errorResponse: ErrorResponse
+    private val errorResponse: ErrorResponse
 ) : RuntimeException() {
 
     fun getFormattedMessage(): String {

@@ -1,4 +1,4 @@
-package com.sherpa.gateway.domain.auth.oauthattributes
+package com.sherpa.gateway.auth.application.service
 
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.LoggerFactory

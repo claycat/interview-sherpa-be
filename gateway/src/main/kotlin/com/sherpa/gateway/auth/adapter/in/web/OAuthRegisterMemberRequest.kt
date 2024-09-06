@@ -1,4 +1,4 @@
-package com.sherpa.gateway.domain.auth.dto
+package com.sherpa.gateway.auth.adapter.`in`.web
 
 data class OAuthRegisterMemberRequest(
     val email: String,
