@@ -1,15 +1,15 @@
-package com.sherpa.gateway.domain.auth.jwt
+package com.sherpa.gateway.auth.application.service
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import java.util.*
 import javax.crypto.SecretKey
 
-@Service
-class JwtService(
+@Component
+class JwtHelper(
     @Value("\${jwt.secret-key}")
     secretKeyBase64: String
 ) {
@@ -25,13 +25,15 @@ class JwtService(
         get() = accessKeyExpirationInS * 100
 
 
-    fun createAccessToken(jwtPayload: AccessTokenPayload): String {
+    fun createJwt(email: String): String {
+
+        val issuedAt = Date(System.currentTimeMillis())
 
         return Jwts.builder()
-            .subject(jwtPayload.email)
+            .subject(email)
             .issuer(issuer)
-            .issuedAt(jwtPayload.issuedAt)
-            .expiration(Date(jwtPayload.issuedAt.time + accessKeyExpirationInMs))
+            .issuedAt(issuedAt)
+            .expiration(Date(issuedAt.time + accessKeyExpirationInMs))
             .signWith(secretKey)
             .compact()
     }

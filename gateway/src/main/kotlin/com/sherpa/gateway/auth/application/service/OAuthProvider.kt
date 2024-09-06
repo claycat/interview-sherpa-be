@@ -1,4 +1,4 @@
-package com.sherpa.gateway.domain.auth.oauthattributes
+package com.sherpa.gateway.auth.application.service
 
 enum class OAuthProvider(val providerId: String) {
     GOOGLE("google"),

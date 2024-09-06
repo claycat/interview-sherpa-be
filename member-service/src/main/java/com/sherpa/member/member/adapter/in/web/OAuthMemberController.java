@@ -1,4 +1,4 @@
-package com.sherpa.member.member.adapter.in;
+package com.sherpa.member.member.adapter.in.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
