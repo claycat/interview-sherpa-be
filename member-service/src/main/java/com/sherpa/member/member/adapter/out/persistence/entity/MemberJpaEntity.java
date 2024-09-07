@@ -1,4 +1,4 @@
-package com.sherpa.member.member.adapter.out.persistence;
+package com.sherpa.member.member.adapter.out.persistence.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

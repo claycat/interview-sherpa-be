@@ -1,0 +1,8 @@
+spring:
+  config:
+    import: optional:file./authorization-service/.env[.properties]
+  application:
+    name: authorization
+
+server:
+  port: ${PORT:8020}
