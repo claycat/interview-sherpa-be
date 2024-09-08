@@ -1,4 +1,4 @@
-package com.sherpa.member.member.adapter.out.persistence.entity;
+package com.sherpa.authorization.adapter.out.persistence.entity;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class RoleActionJpaEntity {
 
 	@Id
 	@UuidGenerator
-	@Column(name = "role_permission_id", nullable = false, updatable = false)
+	@Column(name = "role_action_id", nullable = false, updatable = false)
 	private UUID id;
 
 	@ManyToOne

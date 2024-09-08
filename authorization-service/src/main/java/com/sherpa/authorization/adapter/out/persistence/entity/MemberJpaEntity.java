@@ -1,4 +1,4 @@
-package com.sherpa.member.member.adapter.out.persistence.entity;
+package com.sherpa.authorization.adapter.out.persistence.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,41 +10,31 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.sherpa.member.member.adapter.out.persistence.constant.RoleEnum;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "roles")
-@EntityListeners(AuditingEntityListener.class)
 @Getter
-public class RoleJpaEntity {
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "members")
+public class MemberJpaEntity {
 	@Id
 	@UuidGenerator
-	@Column(name = "role_id", nullable = false, updatable = false)
+	@Column(name = "member_id", nullable = false, updatable = false)
 	private UUID id;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "name", nullable = false)
-	private RoleEnum name;
-
-	@OneToMany(mappedBy = "role")
-	private List<RoleActionJpaEntity> roleActions = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	private List<MemberFlowRoleJpaEntity> memberFlowRoles = new ArrayList<>();
 
 	@CreatedDate
 	@Temporal(TemporalType.TIMESTAMP)
@@ -55,9 +45,4 @@ public class RoleJpaEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
-
-	@Builder
-	public RoleJpaEntity(RoleEnum name) {
-		this.name = name;
-	}
 }

@@ -1,0 +1,28 @@
+spring:
+  config:
+    import: optional:file./authorization-service/.env[.properties]
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:user;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database: h2
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+
+  flyway:
+    enabled: true
+
+server:
+  port: ${DEV_PORT:8020}
