@@ -3,6 +3,7 @@ package com.sherpa.member.member.adapter.out.persistence;
 import java.util.Optional;
 
 import com.sherpa.member.common.annotation.PersistenceAdapter;
+import com.sherpa.member.member.adapter.out.persistence.repository.MemberRepository;
 import com.sherpa.member.member.application.port.out.LoadMemberPort;
 import com.sherpa.member.member.application.port.out.SaveMemberPort;
 import com.sherpa.member.member.domain.Member;

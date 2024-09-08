@@ -1,8 +1,10 @@
-package com.sherpa.member.member.adapter.out.persistence;
+package com.sherpa.member.member.adapter.out.persistence.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sherpa.member.member.adapter.out.persistence.entity.MemberJpaEntity;
 
 public interface MemberRepository extends JpaRepository<MemberJpaEntity, String> {
 

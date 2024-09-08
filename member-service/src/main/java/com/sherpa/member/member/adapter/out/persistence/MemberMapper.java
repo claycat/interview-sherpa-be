@@ -2,6 +2,7 @@ package com.sherpa.member.member.adapter.out.persistence;
 
 import org.springframework.stereotype.Component;
 
+import com.sherpa.member.member.adapter.out.persistence.entity.MemberJpaEntity;
 import com.sherpa.member.member.domain.Member;
 
 @Component
